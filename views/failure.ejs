@@ -1,0 +1,16 @@
+<div class="failure">
+  <% for (var i = 0; i < results.length; i++) { %>
+    <% if (results[i] === 'passed') { %>
+      <div class="passed">
+        <i class="fas fa-check-circle"></i>
+        <span>Test Passed</span>
+      </div>
+    <% } else { %>
+      <div class="failed">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>Expected: '<%= results[i][0] %>', instead got: '<%= results[i][1] %>'</span>
+      </div>
+    <% } %>
+  <% } %>
+  <a href="/">> Return to home</a>
+</div>

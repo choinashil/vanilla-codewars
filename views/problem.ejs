@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/problem.css" />
+    <link rel="stylesheet" href="/lib/codemirror.css" />
+    <link rel="stylesheet" href="/stylesheets/tomorrow-night-bright.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <a href="/">
+        <img src="https://www.theindianwire.com/wp-content/uploads/2018/06/codewars-logo-1-257x300.png" alt="codewars" />
+      </a>
+    </header>
+    <section>
+      <div class="title">
+        <div class="level level<%= problem.difficulty_level %>">Level<%= problem.difficulty_level %></div>
+        <div><%= problem.title %></div>
+        <div>
+          <i class="fas fa-user"></i>
+        </div>
+        <div><%= problem.solution_count %></div>
+      </div>
+      <div class="content">
+        <div class="description">
+          <div>description</div>
+          <div><%= problem.description %></div>
+        </div>
+        <div>
+          <div class="input">
+            <div>Solution:</div>
+            <form action=<%= `/problems/${id}` %> method="post">
+              <textarea class="textarea" name="answer" autofocus rows="30" cols="127"><%= answer %></textarea>
+              <input type="submit" value="▶︎ ATTEMPT" />
+            </form>
+          </div>
+          <div class="result"> Results: </div>
+          <% if (error) { %>
+            <% include ./invalidError %>
+          <% } else if (!results.length) { %>
+            <div class="empty"></div>
+          <% } else if (results.every(result => result === 'passed')) { %>
+            <% include ./success %>
+          <% } else { %>
+            <% include ./failure %>
+          <% } %>
+        </div> 
+      </div>
+    </section>
+    <script src="/lib/codemirror.js"></script>
+    <script src="/mode/javascript/javascript.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
