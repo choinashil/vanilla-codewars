@@ -1,91 +1,96 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
-var vm = require('vm');
+const express = require('express');
+const router = express.Router();
+const vm = require('vm');
+const Problem = require('../models/Problem');
 
-
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  fs.readFile('./data/problems.json', 'utf-8', (err, data) => {
-    problems = JSON.parse(data);
+router.get('/', (req, res) => {
+  Problem.find().then(problems => {
     if (req.query.level) {
-      problems = problems.filter(problem => { 
+      problems = problems.filter(problem => {
         if (problem.difficulty_level === Number(req.query.level)) {
           return problem;
         }
       });
-    } 
-    res.render('index', { problems });
+    }
+    res.render('index', {problems});
   });
 });
 
-router.get('/problems/:problem_id', (req, res) => {
-  fs.readFile('./data/problems.json', 'utf-8', (err, data) => {
-    var answer = '';
-    var results = [];
-    var data = JSON.parse(data);    
-    var index = req.params.problem_id - 1;
-    res.render('problem', {
-      id: req.params.problem_id,
-      title: data[index].title,
-      solutionCount: data[index].solution_count,
-      level: data[index].difficulty_level,
-      description: data[index].description,
-      results,
-      answer,
-      error: ''
-    });
+router.get('/new-kata', (req, res) => {
+  res.render('newKata');
+});
+
+router.post('/new-kata', (req, res) => {
+  const { title, difficulty_level, description, code, solution } = req.body;
+  const newProblem = new Problem({
+    title,
+    solution_count: 0,
+    difficulty_level,
+    description,
+    tests: [{code, solution}]
+  });
+  newProblem.save()
+  .then(() => {res.send({message : 'success'});})
+  .catch(err => console.error(new Date(), err.message));
+});
+
+router.get('/problems/:problem_id', (req, res, next) => {
+  const id = req.params.problem_id;
+  Problem.findById(id, (err, problem) => {
+    if (err) {
+      console.error(new Date(), err.message);
+      next(err);
+    } else {
+      res.render('problem', {
+        id,
+        problem,
+        results: [],
+        answer: '',
+        error: ''
+      });
+    }
   });
 });
 
 router.post('/problems/:problem_id', (req, res) => {
-  fs.readFile('./data/problems.json', 'utf-8', (err, data) => {
-    index = req.params.problem_id - 1;
-    problem = JSON.parse(data)[index];
-    var answer = req.body.answer;
-    var results = [];
-    var sandbox = {};
-    for (var i = 0; i < problem.tests.length; i++) {
+  const id = req.params.problem_id;
+  const answer = req.body.answer;
+  const results = [];
+
+  Problem.findById(id).then(problem => {
+    const sandbox = {};
+    for (let i = 0; i < problem.tests.length; i++) {
       try {
-        var script = new vm.Script(`
+        const script = new vm.Script(`
           function solution(arg) {
             return (${req.body.answer})(arg);
           };
           result = ${problem.tests[i].code};
         `);
-        const context = vm.createContext(sandbox); // context = contextifiedSandbox
+        const context = vm.createContext(sandbox);
         script.runInNewContext(context);
       } catch (error) {
         res.render('problem', {
-          id: req.params.problem_id,
-          title: problem.title,
-          solutionCount: problem.solution_count,
-          level: problem.difficulty_level,
-          description: problem.description,
+          id,
+          problem,
           results,
           answer,
-          error 
-        });   
+          error
+        });
       }
-
       if (sandbox.result === problem.tests[i].solution) {
         results.push('passed');
       } else {
         results.push([problem.tests[i].solution, sandbox.result]);
       }
     }
-
     res.render('problem', {
-      id: req.params.problem_id,
-      title: problem.title,
-      solutionCount: problem.solution_count,
-      level: problem.difficulty_level,
-      description: problem.description,
+      id,
+      problem,
       results,
       answer,
       error: ''
     });
-
   });
 });
 

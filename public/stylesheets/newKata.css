@@ -1,0 +1,158 @@
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #303133;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #e6e6e6;
+}
+
+header {
+    height: 80px;
+    padding: 10px;
+    background-color: #2a2a2a;
+}
+
+header img {
+    height: 80px;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 80px);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.add-kata-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 980px;
+    height: 680px;
+    box-sizing: border-box;
+    background-color: #262729;
+    color: #efefef;
+    overflow: auto;
+}
+
+.add-kata-form > form > div {
+    margin-bottom: 20px;
+}
+
+.add-kata-form > form > div input, textarea {
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    background-color: #383a3d;
+    color: #efefef;
+}
+
+.field-name {
+    font-size: 22px;
+    margin-right: 20px;
+}
+
+.field-title > input {
+    width: 500px;
+}
+
+.field-level {
+    display: flex;
+}
+
+.field-level > div {
+    display: flex;
+    font-size: 22px;
+}
+
+.field-level > div > label {
+    display: flex;
+    align-items: baseline;
+    margin-right: 30px;
+}
+
+.field-level > div > label > input {
+    transform: scale(1.5);
+    margin-right: 10px;
+}
+
+.field-description > div {
+    margin-bottom: 12px;
+}
+
+.field-description > textarea {
+    resize: none;
+}
+
+.field-test {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.field-test > .field-name {
+    margin-bottom: 12px;
+}
+
+.field-test > div:nth-child(2) > span {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.field-test > div:nth-child(2) > input:nth-child(2) {
+    margin-right: 30px;
+}
+
+.field-test .add-more {
+    cursor: pointer;
+}
+
+.field-test .add-more:hover {
+    text-decoration: underline;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.button-wrapper input:hover {
+    background-color: #69ae51;
+    cursor: pointer;
+}
+
+.success > div {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #69ae51;
+    font-size: 40px;
+    font-weight: 100;
+}
+
+.success > a > div {
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 100;
+}
+
+.success > a > div:hover {
+    text-decoration: underline;
+}
+
+.invisible {
+    display: none;
+}

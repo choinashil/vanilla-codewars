@@ -1,0 +1,132 @@
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #303133;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #e6e6e6;
+}
+
+header {
+    height: 80px;
+    padding: 10px;
+    background-color: #2a2a2a;
+}
+
+header img {
+    height: 80px;
+}
+
+.content {
+    display: flex;
+    padding: 30px;
+}
+
+aside {
+    background-color: #262729;
+    width: 332px;
+    height: 250px;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.difficulty-title {
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.difficulty-title > div:nth-child(1) {
+    margin-bottom: 10px;
+    color: #efefef;
+    font-size: 20px;
+}
+
+.difficulty-title > div:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.difficulty-title > div:nth-child(2) > a {
+    margin-right: 20px;
+}
+
+.add-kata {
+    display: flex;
+    justify-content: center;
+}
+
+.add-kata > a > div:nth-child(1) {
+    padding: 8px 15px;
+    border: 1px solid #69ae51;
+    border-radius: 20px;
+    font-size: 20px;
+    color: #69ae51;
+    cursor: pointer;
+}
+
+.add-kata > a > div:nth-child(1):hover {
+    background-color: #69ae51;
+    color: #262729;
+}
+
+.level {
+    padding: 5px 5px 3px 5px;
+}
+
+.level1 {
+    border: 2px solid #e6e6e6;
+    color: #e6e6e6;
+}
+
+.level2 {
+    border: 2px solid #ebb52f;
+    color: #ebb52f;
+}
+
+.level3 {
+    border: 2px solid #3f7fb9;
+    color: #3f7fb9;
+}
+
+section {
+    width: 100%;
+    padding-top: 5px;
+}
+
+section > div:nth-child(1) {
+    color: #c9c9c9;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+section > div:nth-child(2) {
+    padding-bottom: 20px;
+}
+
+.kata {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #454648;
+}
+
+.kata > div:nth-child(1) {
+    margin-right: 15px;
+}
+
+.kata > div:nth-child(2) {
+    margin-right: 20px;
+    font-size: 19px;
+}
+
+.kata > div:nth-child(3) {
+    margin-right: 5px;
+}

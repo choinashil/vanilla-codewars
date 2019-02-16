@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/newKata.css">
+  </head>
+  <body>
+    <% include ./header %>
+    <section>
+      <div class="add-kata-form">
+        <form class="form">
+          <div class="field-title">
+            <span class="field-name">Title</span>
+            <input type="text" class="title">
+          </div>
+          <div class="field-level">
+            <span class="field-name">Level</span>
+            <div>
+              <label><input type="radio" name="level" value="1" checked>1</label>
+              <label><input type="radio" name="level" value="2">2</label>
+              <label><input type="radio" name="level" value="3">3</label>
+            </div>
+          </div>
+          <div class="field-description">
+            <div class="field-name">Description</div>
+            <textarea class="description" rows="10" cols="60"></textarea>
+          </div>
+          <div class="field-test">
+            <div class="field-name">Test Case</div>
+            <div>
+              <span>Case</span>
+              <input type="text" class="test-case">
+              <span>Solution</span>
+              <input type="text" class="solution">
+            </div>
+          </div>
+          <div class="button-wrapper">
+            <input type="button" class="button" value="complete">
+          </div>
+        </form>
+        <div class="success invisible">
+          <div>New Kata Added!</div>
+          <a href="/"><div>Return to Home</div></a>
+        </div>
+      </div>
+    </section>
+    <script src="/javascripts/newKata.js"></script>
+  </body>
+</html>
